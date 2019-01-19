@@ -85,7 +85,7 @@ module.exports = {
             loader: 'sass-loader'
           }
         ]
-      }
+      }     
     ]
   },
   node: {
