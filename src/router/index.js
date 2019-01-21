@@ -9,6 +9,9 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import CategoryAnimal from '@/components/CategoryAnimal'
 import ListUser from '@/components/ListUser'
+import Partner from '@/components/Partner'
+import Tournaments from '@/components/Tournaments'
+
 
 Vue.use(Router)
 
@@ -58,6 +61,16 @@ export default new Router({
       path: '/listuser',
       name: 'ListUser',
       component: ListUser
+    },
+    {
+      path: '/partner',
+      name: 'Partner',
+      component: Partner
+    },
+    {
+      path: '/tournaments',
+      name: 'Tournaments',
+      component: Tournaments
     }
   ]
 })

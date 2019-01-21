@@ -25,6 +25,31 @@ module.exports = {
     'generator-star-spacing': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    "indent": ["error", 4]
+    "indent": 0,
+    'comma-dangle': 0,
+    'space-before-function-paren': 0,
+    'consistent-return': 0,
+    'no-param-reassign': 0,
+    'no-trailing-spaces': 0,
+    'arrow-parens': 0,
+    'prefer-const': 0,
+    'prefer-template': 0,
+    'no-unused-vars': 0,
+    'func-names': 0,
+    'object-shorthand': 0,
+    'no-mixed-operators': 0,
+    'no-shadow': 0,
+    'no-use-before-define': 0,
+    'no-unused-expressions': 0,
+    'no-console': 0,
+    'max-len': 0,
+    'semi': 0,
+    'space-before-blocks': 0,
+    'quotes': 0,
+    'comma-spacing': 0,
+    'no-multiple-empty-lines': 0,
+    'padded-blocks': 0,
+    'eol-last': 0,
+    'func-call-spacing': 0
   }
 }
