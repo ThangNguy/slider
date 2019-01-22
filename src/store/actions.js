@@ -5,6 +5,10 @@ export const getTournaments = (context) => {
 
     Axios.get(getTournament(8))
     .then(response => {
-        context.commit('setTournaments', { response })
+        context.commit('setTournaments', { response });
     })
 }
+
+
+
+

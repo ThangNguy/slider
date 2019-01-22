@@ -11,6 +11,7 @@ import CategoryAnimal from '@/components/CategoryAnimal'
 import ListUser from '@/components/ListUser'
 import Partner from '@/components/Partner'
 import Tournaments from '@/components/Tournaments'
+import FilterTournament from '@/components/FilterTournament'
 
 
 Vue.use(Router)
@@ -71,6 +72,11 @@ export default new Router({
       path: '/tournaments',
       name: 'Tournaments',
       component: Tournaments
+    },
+    {
+      path: '/filter',
+      name: 'FilterTournament',
+      component: FilterTournament
     }
   ]
 })
