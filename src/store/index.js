@@ -11,19 +11,19 @@ export default new Vuex.Store ({
         tournaments: null,
         tournamentSport: {
             data: [
-                { tittle: 'All', value: 'all'}
+                {title: 'All', value: 'all'}
             ],
             current: "all"
         },      
         tournamentState: {
             data: [
-                { tittle: 'All', value: 'all'}
+                {title: 'All', value: 'all'}
             ],
             current: "all"
         },      
         tournamentCity: {
             data: [
-                { tittle: 'All', value: 'all'}
+                {title: 'All', value: 'all'}
             ],
             current: "all"
         }    
