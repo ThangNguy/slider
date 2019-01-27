@@ -1,6 +1,8 @@
 import Axios from 'axios'
 import { getTournament } from './config'
 
+
+
 export const getTournaments = (context) => {
 
     Axios.get(getTournament(8))
@@ -8,7 +10,3 @@ export const getTournaments = (context) => {
         context.commit('setTournaments', { response });
     })
 }
-
-
-
-

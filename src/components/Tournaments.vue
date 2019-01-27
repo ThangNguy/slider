@@ -1,63 +1,25 @@
 <template>
     <div class="contain cols-3">
         <div class="row">
-            <div class="col">
+            <div class="col">        
             </div>
             <div class="col">
                 <div>
-                    <div class="row row-select">
-                        <div class="col col-select">
-                            <label for="tournamentfilterSport">Sport</label>
-                            <select class="custom-select" v-model="tournamentFilterSport">
-                                <option v-for="(option, index) in tournamentSport" :key="index"> {{ option.title }} </option>
-                            </select>
-                        </div>
-                        <div class="col col-select">
-                            <label for="tournamentfilter">State</label>
-                            <select class="custom-select" v-model="tournamentFilterState">
-                                <option v-for="(option, index) in tournamentState" :key="index"> {{ option.title }} </option>
-                            </select>
-                        </div>
-                        <div class="col col-select">
-                            <label for="tournamentfilterCity">City</label>
-                            <select class="custom-select" v-model="tournamentFilterCity">
-                                <option v-for="(option, index) in tournamentCity" :key="index"> {{ option.title }} </option>
-                            </select>
-                        </div>
-                    </div>
+                    <TournamentFilter />
                 </div>
+               <div v-link="'/tournaments/details/95'">User</div>
                 <ul class="list-group" v-if="tournaments">
-                    <li class="list-group-item active">The are ({{ filterTournament.length }}) upcoming tournaments</li>      
-                    <li class="list-group-item" v-for="(tournament, index) in filterTournament" :key="index">              
-                            <img src="../assets/baseball-icon.svg">           
-                            <p><strong>{{ formatUpperFirstCase(tournament.name.toLowerCase()) }}</strong></p>
-                            <p>{{ tournament.city}}, {{ tournament.state }} &#9679; {{ formatTournamentTime(tournament.startDate, tournament.endDate) }}</p>
-                            
-                    </li>    
+                    <li class="list-group-item active">The are ({{ tournaments.length }}) upcoming tournaments</li> 
+                    <li class="list-group-item" v-for="(tournament, index) in tournaments" :key="index" v-show="isValidFilter(tournament)">              
+                        <img src="../assets/baseball-icon.svg">           
+                        <router-link :to="'/tournaments/details/' + tournament.ID"><p><strong>{{ formatUpperFirstCase(tournament.name.toLowerCase()) }}</strong></p></router-link>
+                        <p>{{ tournament.city }}, {{ tournament.state }} &#9679; {{ formatTournamentTime(tournament.startDate, tournament.endDate) }}</p>                           
+                    </li>   
                 </ul>
             </div>
             <div class="col">
             </div>  
         </div>
-        <!-- <div class="col-sm-6 col-offset-sm-3">
-          <h1> {{ heading }} </h1>
-          <div class="form-group" v-for="(n,index) in count" :key="index">
-          </div>
-          <div class="form-group">
-              <label for="Make">Make</label>
-              <select class="form-control" name="make" id="make" v-model="make">
-                  <option :value="null" disabled selected>Select Make</option>
-                  <option v-for="(option, index) in makes_options" :key="index" :value="option.id"> {{ option.text }} </option>
-              </select>
-          </div>
-          <div class="form-group">
-              <label for="Model">Model</label>
-              <select class="form-control" name="model" id="model" v-model="model">
-                  <option :value="null" disabled selected>Select Model</option>
-                  <option v-for="(option, index) in model_options[make]" :key="index" :value="option.id"> {{ option.text }} </option>
-              </select>
-          </div>
-        </div> -->
     </div>
 </template>
 
@@ -65,15 +27,12 @@
 
 import moment from 'moment'
 import _ from 'lodash'
+import TournamentFilter from './TournamentFilter'
 
 export default {
     name: "Tournaments",
-    data() {
-        return {
-        tournamentFilterSport: "All",
-        tournamentFilterState: "All",
-        tournamentFilterCity: "All"
-        }
+    components: {
+        TournamentFilter
     },
     computed: {
         tournaments() {
@@ -83,95 +42,34 @@ export default {
             return this.$store.state.tournamentSport.data  
         },
         tournamentState() {
-            // console.log(this.$store.state.tournamentState)
             return this.$store.state.tournamentState.data  
         },
         tournamentCity() {
             return this.$store.state.tournamentCity.data  
-        },
-
-        filterTournament() {
-            return this.$store.state.tournaments.filter((o) => {
-                if(this.tournamentFilterSport !== "All"){
-                    return 
-                        o.city.toLowerCase().includes(this.tournamentFilterCity.toLowerCase()) &&
-                        o.state.toLowerCase().includes(this.tournamentFilterState.toLowerCase())
-                }   else if (this.tournamentFilterState !== "All"){
-                    return 
-                        o.city.toLowerCase().includes(this.tournamentFilterCity.toLowerCase()) &&
-                        o.sport.toLowerCase().includes(this.tournamentFilterSport.toLowerCase())
-                }   else if (this.tournamentFiltercity !== "All"){
-                    return 
-                        o.state.toLowerCase().includes(this.tournamentFilterState.toLowerCase()) &&
-                        o.sport.toLowerCase().includes(this.tournamentFilterSport.toLowerCase())
-                }   else if (this.tournamentFilterSport !== "All" & this.tournamentFilterState !== "All") {
-                        return 
-                            o.city.toLowerCase().includes(this.tournamentFilterCity.toLowerCase())
-                }   else if (this.tournamentFilterCity !== "All" & this.tournamentFilterState !== "All") {
-                        return 
-                            o.sport.toLowerCase().includes(this.tournamentFilterSport.toLowerCase())
-                }   else if (this.tournamentFilterCity !== "All" & this.tournamentFilterState !== "All") {
-                        return 
-                            o.sport.toLowerCase().includes(this.tournamentFilterSport.toLowerCase())
-                }   else if (this.tournamentFilterCity !== "All" & this.tournamentFilterState !== "All" & this.tournamentFilterSport !== "All"){
-                        return
-                            o
-                }   else {
-                    return  o.state.toLowerCase().includes(this.tournamentFilterState.toLowerCase()) &&
-                            o.city.toLowerCase().includes(this.tournamentFilterCity.toLowerCase()) &&
-                            o.sport.toLowerCase().includes(this.tournamentFilterSport.toLowerCase())
-                }
-                // if (this.tournamentFilterState !== "All" && this.tournamentFilterCity !== "All" && this.tournamentFilterSport){
-                //     return o.state.toLowerCase().includes(this.tournamentFilterState.toLowerCase()) &&
-                //         o.city.toLowerCase().includes(this.tournamentFilterCity.toLowerCase()) &&
-                //         o.sport.toLowerCase().includes(this.tournamentFilterSport.toLowerCase())
-                // } else {
-                    // return o
-                
-                
-            })
-        },
-        filterTounemantState() {
-            return this.$store.state.tournaments.filter((o) => {
-                if (this.tournamentFilterState !== "All"){
-                    return o.state.toLowerCase().includes(this.tournamentFilterState.toLowerCase())
-                } else {
-                    return o
-                }
-                
-            })
-        },
-        filterTounemantCity() {
-            return this.$store.state.tournaments.filter((tournament) => {
-                if (this.tournamentFilterCity !== "All"){
-                    return tournament.state.toLowerCase().includes(this.tournamentFilterCity.toLowerCase())
-                } else {
-                    return tournament
-                }
-                
-            })
-        },
-        filterTounemantSport() {
-            return this.$store.state.tournaments.filter((tournament) => {
-                if (this.tournamentFilterSport !== "All"){
-                    return tournament.state.toLowerCase().includes(this.tournamentFilterSport.toLowerCase())
-                } else {
-                    return tournament
-                }
-                
-            })
         }
     },
     methods: {
+        isValidFilter(tournament) {
+            const currentSport = this.$store.state.tournamentSport.current
+            const currentState = this.$store.state.tournamentState.current
+            const currentCity = this.$store.state.tournamentCity.current
+
+            if ((currentSport === 'all' || currentSport === tournament.sport.toLowerCase()) &&
+            (currentState === 'all' || currentState === tournament.state.toLowerCase()) &&
+            (currentCity === 'all' || currentCity === tournament.city.toLowerCase())) {
+                return true
+            }
+            return false;
+        },
         formatTournamentTime(startDate, endDate) {
             return moment(startDate).format('MMMM, D') + ' - ' + moment(endDate).format('D, YYYY');
         },
         formatUpperFirstCase(str) {
             return _.startCase(str)
-        }     
+        }          
     },
     created() {
-        this.$store.dispatch('getTournaments')   
+        this.$store.dispatch('getTournaments')
     } 
 }
 </script>

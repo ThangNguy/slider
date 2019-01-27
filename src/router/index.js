@@ -12,6 +12,8 @@ import ListUser from '@/components/ListUser'
 import Partner from '@/components/Partner'
 import Tournaments from '@/components/Tournaments'
 import FilterTournament from '@/components/FilterTournament'
+import TournamentFilter from '@/components/TournamentFilter'
+import TournamentDetail from '@/components/TournamentDetail'
 
 
 Vue.use(Router)
@@ -77,6 +79,16 @@ export default new Router({
       path: '/filter',
       name: 'FilterTournament',
       component: FilterTournament
+    },
+    {
+      path: '/filtertour',
+      name: 'TournamentFilter',
+      component: TournamentFilter
+    },
+    {
+      path: '/tournaments/details/:tournamentID',
+      name: 'TournamentDetail',
+      component: TournamentDetail
     }
   ]
 })

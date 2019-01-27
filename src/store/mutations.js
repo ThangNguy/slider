@@ -2,7 +2,6 @@ import _ from 'lodash'
 
 export const setTournaments = (state, payload) => {
     state.tournaments = payload.response.data.results
-    console.log(state)
         // Hàm map của lodash tạo ra một mảng mới item bằng cách chạy các phần tử trong mảng tournament
         _.map(state.tournaments, (item) => {
             // Hàm findIndex duyệt từng phần tử trong sport trong item, nếu giống tittle trong  state.tournamentSport.data
@@ -26,8 +25,17 @@ export const setTournaments = (state, payload) => {
                 state.tournamentCity.data.push({ title: item.city, value: item.city.toLowerCase() })
             }
         })
-    
 }
 
+export const setCurrentSport = (state, current) => {
+    state.tournamentSport.current = current
+}
 
+export const setCurrentState = (state, current) => {
+    state.tournamentState.current = current
+}
+
+export const setCurrentCity = (state, current) => {
+    state.tournamentCity.current = current
+}
 

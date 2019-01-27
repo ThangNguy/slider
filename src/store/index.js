@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { setTournaments } from './mutations'
+import { setTournaments, setCurrentSport, setCurrentState, setCurrentCity } from './mutations'
 import { getTournaments } from './actions'
-
 
 Vue.use(Vuex)
 
@@ -26,12 +25,16 @@ export default new Vuex.Store ({
                 {title: 'All', value: 'all'}
             ],
             current: "all"
-        }    
+        },
+        tournamentID: null   
     },
     mutations: {
-        setTournaments
+        setTournaments,
+        setCurrentSport,
+        setCurrentState,
+        setCurrentCity
     },
     actions: {
-        getTournaments      
+        getTournaments
     }
 });
