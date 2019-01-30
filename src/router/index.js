@@ -14,6 +14,7 @@ import Tournaments from '@/components/Tournaments'
 import FilterTournament from '@/components/FilterTournament'
 import TournamentFilter from '@/components/TournamentFilter'
 import TournamentDetail from '@/components/TournamentDetail'
+import GoogleMap from '@/components/GoogleMap'
 
 
 Vue.use(Router)
@@ -89,6 +90,11 @@ export default new Router({
       path: '/tournaments/details/:tournamentID',
       name: 'TournamentDetail',
       component: TournamentDetail
+    },
+    {
+      path: '/googlemap',
+      name: 'GoogleMap',
+      component: GoogleMap
     }
   ]
 })

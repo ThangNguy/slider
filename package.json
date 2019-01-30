@@ -15,6 +15,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.2.1",
+    "hooper": "0.0.7",
+    "hopper": "^0.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.23.0",
     "node-sass": "^4.11.0",
@@ -22,6 +24,7 @@
     "vue": "^2.5.2",
     "vue-carousel": "^0.17.0",
     "vue-router": "^3.0.1",
+    "vue2-google-maps": "^0.10.5",
     "vuex": "^3.1.0"
   },
   "devDependencies": {
